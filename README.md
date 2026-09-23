@@ -111,8 +111,7 @@ The result shows the site uses WordPress with Yoast SEO plugin v27.9. The meta d
 
 This helps in footprinting because it reveals the CMS, SEO plugin version and the purpose of the website.
 
-![](4-Screenshot-curl-l.png)
-
+![](4-Screenshot-curl.png)
 
 
 
