@@ -39,13 +39,42 @@ For the network-scanning phase, I used my Windows host and Kali Linux virtual ma
 
 All activities were performed within an authorized educational environment.
 
+---
+
 ## 3. Activities Performed
 
 ### 3.1 Footprinting & Reconnaissance
 
-I executed seven different recon tools on networkwalks.com — WHOIS, WhatWeb, Nslookup, curl, WafW00f DNSRecon and theHARVESTER.Each tool was used to collect a different type of public information about the target, from domain ownership to the technologies running on the web server.
+The first activity focused on footprinting and reconnaissance. 
 
-**WHOIS** was the first step because domain registration information is usually the easiest place to start. The result showed the domain is hosted with GoDaddy.com, LLC, registered on 20 November 2019 and set to expire on 20 November 2027, last updated on 11 November 2021. The record has four client-side locks (clientDeleteProhibited, clientRenewProhibited, clientTransferProhibited, clientUpdateProhibited) which means the domain is protected from unauthorized changes. The Name Servers are NS6133.HOSTGATOR.COM and NS6134.HOSTGATOR.COM.
+### theHarvester
+
+I used theHarvester as part of the reconnaissance phase to collect publicly available information associated with the authorized target.
+
+The tool demonstrates how information from publicly accessible sources can be used to build an initial picture of an organization's external footprint.
+
+Depending on the selected data sources, theHarvester can provide information such as:
+
+*Domains
+
+*Subdomains
+
+*Hosts
+
+*Email addresses
+
+*IP-related information
+
+*Other publicly available reconnaissance information
+
+The activity helped demonstrate the importance of OSINT (Open-Source Intelligence) during the early stages of security assessment.
+
+![](
+
+### whois
+
+
+was the first step because domain registration information is usually the easiest place to start. The result showed the domain is hosted with GoDaddy.com, LLC, registered on 20 November 2019 and set to expire on 20 November 2027, last updated on 11 November 2021. The record has four client-side locks (clientDeleteProhibited, clientRenewProhibited, clientTransferProhibited, clientUpdateProhibited) which means the domain is protected from unauthorized changes. The Name Servers are NS6133.HOSTGATOR.COM and NS6134.HOSTGATOR.COM.
 ### Nslookup
 
 I used nslookup to find the IP address mapped to the domain networkwalks.com. This tool queries the DNS server directly and is useful for confirming where a website is hosted and what DNS resolver is being used.
