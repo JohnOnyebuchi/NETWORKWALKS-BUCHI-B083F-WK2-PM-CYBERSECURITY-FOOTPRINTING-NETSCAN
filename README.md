@@ -1,4 +1,4 @@
-# W2-PM-CYBERSECURITY-NETWORKWALKS
+## W2-PM-CYBERSECURITY-NETWORKWALKS
 FOOTPRINTING &amp; NETWORK SCANNING PHASES
 # PENETRATION TESTING REPORT
 
@@ -102,12 +102,29 @@ From this, I learned that footprinting with nslookup is important because it rev
 ![](
 3-Screenshot-nslookup.png)
 
+
+## Curl
+
+I used curl to fetch the HTTP response and HTML source of networkwalks.com. The command `curl -I https://networkwalks.com` returned the page header and meta tags.
+
+The result shows the site uses WordPress with Yoast SEO plugin v27.9. The meta description states it specializes in Network training courses including Cisco CCNA, CCNP, Cybersecurity, Ethical Hacking, Python Programming and Linux. It also shows Open Graph tags like og:title "Networkwalks Academy" and og:type website.
+
+This helps in footprinting because it reveals the CMS, SEO plugin version and the purpose of the website.
+
+![](4-Screenshot-curl-l.png)
+
+
+
+
 ## WafW00f
 
 I used WafW00f to detect if a Web Application Firewall (WAF) is protecting networkwalks.com. The tool sent 2 requests to https://networkwalks.com.
 
 The result shows the site is behind **ModSecurity (SpiderLabs) WAF**. This means the website has a firewall filtering malicious traffic.
-### DNSRecon
+
+![](5-Screenshot-wafw00f.png)
+
+## DNSRecon
 
 I used DNSRecon for DNS enumeration on networkwalks.com. The tool started general enumeration for the domain.
 
@@ -119,26 +136,10 @@ The results showed:
 
 This confirms the domain uses HostGator name servers and the same IP for mail and web hosting.
 
-### Curl
+![](6-Screenshot-dnsrecon.png)
 
-I used curl to fetch the HTTP response and HTML source of networkwalks.com. The command `curl -I https://networkwalks.com` returned the page header and meta tags.
 
-The result shows the site uses WordPress with Yoast SEO plugin v27.9. The meta description states it specializes in Network training courses including Cisco CCNA, CCNP, Cybersecurity, Ethical Hacking, Python Programming and Linux. It also shows Open Graph tags like og:title "Networkwalks Academy" and og:type website.
-
-This helps in footprinting because it reveals the CMS, SEO plugin version and the purpose of the website.
-### WhatWeb
-
-I used WhatWeb to fingerprint the technologies used by networkwalks.com. The scan was done on both http and https.
-
-The result shows:
-- Server: Apache with IP 192.232.216.135, Country UNITED STATES
-- First response was 301 Moved Permanently redirecting to https://networkwalks.com/
-- Second response 200 OK shows it runs WordPress 7.1.1, Bootstrap 7.1.4, jQuery 3.7.1, WordPress Download Manager 3.3.58
-- Email found: info@networkwalks.com
-- Other technologies: Google Tag Manager, HTML5, Frame
-
-This information is useful for footprinting as it reveals the web server, CMS and plugins.
-### 3.2 Network Scanning with nmap
+## 3.2 Network Scanning with nmap
 
 The second half of the week moved from passive lookups to actively scanning a live network, in this case, my own Wi-Fi hotspot rather than an organisational LAN.
 
