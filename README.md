@@ -16,16 +16,29 @@ FOOTPRINTING &amp; NETWORK SCANNING PHASES
 | Phases covered | Phase 1: Reconnaissance & Footprinting<br>Phase 2: Scanning & Network Discovery<br> |
 | Tools Used | whois, whatweb, nslookup, curl, wafw00f, dnsrecon, theHARVESTER, Nmap |
 | Summary | This report contains footprinting and scanning results for networkwalks.com |
-
+----
 1. ## **1. Liability Disclaimer**
  
-Every task in this report was carried out either against networkwalks.com, for which the internship program already has documented written approval, or against a Wi-Fi network that belongs to me and that I administer myself. Nothing here is intended for anything beyond learning and personal skill-building. This document should not be used to target a system that has not been authorised for testing, that responsibility sits entirely with whoever chooses to do so, not with Networkwalks, the instructors, or me. Unauthorised access carries real legal consequences in most jurisdictions, whether or not any actual damage occurs.
+I performed these activities only on systems, devices, and networks where I had appropriate authorization or that I personally owned or controlled.
+
+All activities documented in this report were performed for educational, cybersecurity training, and research purposes. No unauthorized access, exploitation, or destructive activity was performed.
+
+The techniques and tools described in this report should only be used within an authorized scope. Unauthorized scanning, reconnaissance, or access to computer systems may violate applicable laws and organizational policies.
+
+----
+
 ## 2. Introduction
 
-This report documents the second week of my cybersecurity internship at Networkwalks, split across two hands-on exercises. The first (W2-PM1) focuses on footprinting the networkwalks.com domain using various Kali Linux command-line tools. The second (W2-PM2) focuses on host discovery on a Wi-Fi network that belongs to me using Nmap (`nmap -sn 192.168.43.0/24`). Together, both exercises show the steps an attacker usually follows at the start of an engagement, starting with information that is already public and then moving to actively probing which hosts and services are reachable.
+This report documents the Week 2 practical cybersecurity activities covering footprinting, reconnaissance, network discovery, and scanning.
 
-All activities below were executed from my Kali Linux terminal. For each tool, I documented the exact command I ran, the result I got, a screenshot of the actual session, and a short note on why that piece of information is important for profiling this target.
-All activities below were executed from my Kali Linux terminal. For each tool, I documented the exact command I ran, the result I got, a screenshot of the actual session, and a short note on why that piece of information is important for profiling this target.
+The activities were designed to demonstrate how a cybersecurity professional can begin by gathering information about an authorized target and then move toward identifying devices and services within a controlled network environment.
+
+During the reconnaissance phase, I worked with Kali Linux and used tools including theHarvester and other reconnaissance utilities to understand how publicly available information can contribute to an initial picture of a target.
+
+For the network-scanning phase, I used my Windows host and Kali Linux virtual machine in a controlled VirtualBox Host-Only network. I identified the local subnet, confirmed connectivity, discovered active hosts, and performed Nmap scanning against my own local network.
+
+All activities were performed within an authorized educational environment.
+
 ## 3. Activities Performed
 
 ### 3.1 Footprinting & Reconnaissance
