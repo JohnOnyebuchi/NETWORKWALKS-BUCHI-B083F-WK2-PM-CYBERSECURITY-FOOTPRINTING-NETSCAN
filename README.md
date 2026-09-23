@@ -82,7 +82,16 @@ The objective was to understand how information such as domain registration deta
 
 ![](1-Screenshot-whois.png)
 
-### Nslookup
+### Whatweb
+
+I used WhatWeb to fingerprint the technologies used by the authorized target website.
+The scan identified Apache as the web server and WordPress 7.1.1 as the content management system. It also identified WP Download Manager 3.3.58, jQuery 3.7.1, Bootstrap, HTML5, Google Tag Manager and other technologies.
+
+The target resolved to IP address 192.232.216.135. The results demonstrated how technology fingerprinting can provide useful information about a web application's technology stack during the reconnaissance phase.
+
+![](
+
+## Nslookup
 
 I used nslookup to find the IP address mapped to the domain networkwalks.com. This tool queries the DNS server directly and is useful for confirming where a website is hosted and what DNS resolver is being used.
 
