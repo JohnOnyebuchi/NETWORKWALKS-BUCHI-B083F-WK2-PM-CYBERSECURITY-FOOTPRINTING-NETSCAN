@@ -69,14 +69,18 @@ Depending on the selected data sources, theHarvester can provide information suc
 
 The activity helped demonstrate the importance of OSINT (Open-Source Intelligence) during the early stages of security assessment.
 
+
+
 ![](7-Screenshot_TheHarvester.png)
+
+
 
 ### whois
 
 WHOIS was used to examine publicly available domain-registration information where applicable.
 The objective was to understand how information such as domain registration details and name servers can contribute to an organization's external footprint.
 
-![]
+![](1-Screenshot-whois.png)
 
 ### Nslookup
 
