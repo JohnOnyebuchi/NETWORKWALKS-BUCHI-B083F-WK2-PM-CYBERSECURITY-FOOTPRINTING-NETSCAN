@@ -43,11 +43,11 @@ All activities were performed within an authorized educational environment.
 
 ## 3. Activities Performed
 
-### 3.1 Footprinting & Reconnaissance
+## 3.1 Footprinting & Reconnaissance
 
 The first activity focused on footprinting and reconnaissance. 
 
-### theHarvester
+## theHarvester
 
 I used theHarvester as part of the reconnaissance phase to collect publicly available information associated with the authorized target.
 
@@ -75,14 +75,14 @@ The activity helped demonstrate the importance of OSINT (Open-Source Intelligenc
 
 
 
-### whois
+## whois
 
 WHOIS was used to examine publicly available domain-registration information where applicable.
 The objective was to understand how information such as domain registration details and name servers can contribute to an organization's external footprint.
 
 ![](1-Screenshot-whois.png)
 
-### Whatweb
+## Whatweb
 
 I used WhatWeb to fingerprint the technologies used by the authorized target website.
 The scan identified Apache as the web server and WordPress 7.1.1 as the content management system. It also identified WP Download Manager 3.3.58, jQuery 3.7.1, Bootstrap, HTML5, Google Tag Manager and other technologies.
