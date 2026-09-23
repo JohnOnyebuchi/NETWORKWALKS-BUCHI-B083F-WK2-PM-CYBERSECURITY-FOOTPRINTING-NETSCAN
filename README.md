@@ -89,7 +89,7 @@ The scan identified Apache as the web server and WordPress 7.1.1 as the content 
 
 The target resolved to IP address 192.232.216.135. The results demonstrated how technology fingerprinting can provide useful information about a web application's technology stack during the reconnaissance phase.
 
-![](
+![](2-Screenshot-whatweb.png)
 
 ## Nslookup
 
@@ -98,7 +98,11 @@ I used nslookup to find the IP address mapped to the domain networkwalks.com. Th
 I ran the command `nslookup networkwalks.com` and the query was resolved by Google's public DNS server at 8.8.8.8 on port 53. The result returned a non-authoritative answer showing that networkwalks.com points to IP address 192.232.216.135. This confirms the domain is active and publicly resolvable.
 
 From this, I learned that footprinting with nslookup is important because it reveals the underlying IP of the target, which can be used for further enumeration of the hosting infrastructure.
-### WafW00f
+
+![](
+3-Screenshot-nslookup.png)
+
+## WafW00f
 
 I used WafW00f to detect if a Web Application Firewall (WAF) is protecting networkwalks.com. The tool sent 2 requests to https://networkwalks.com.
 
