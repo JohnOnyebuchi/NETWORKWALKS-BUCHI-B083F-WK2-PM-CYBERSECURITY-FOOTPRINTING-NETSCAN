@@ -24,7 +24,7 @@
 
 | Field | Detail |
 | :--- | :--- |
-| Pentester Name (Cybersecurity Professional) | John, Onyebuchi |
+| Pentester Name| Sunday John Onyebuchi |
 | Program/Batch | B083F-Networkwalks |
 | Date | 22 September 2026 |
 | Modules completed | W2-PM1 (Footprinting & Reconnissance Attacks with Multiple Kali Tools) , W2-PM4 (Footprinting & Reconnissance with theHARVESTER) , W2-PM5 (Zenmap Scanning)
@@ -155,18 +155,34 @@ This confirms the domain uses HostGator name servers and the same IP for mail an
 ![](6-Screenshot-dnsrecon.png)
 
 
-## 3.2 Network Scanning with nmap
+## 3.2 Network Scanning with Zenmap
 
-The second half of the week moved from passive lookups to actively scanning a live network, in this case, my own Wi-Fi hotspot rather than an organisational LAN.
+For the second activity,I used Zenmap to perform network discovery on my controlled local Host-Only network.The objective was to identify the local subnet,discover active hosts,examine available host information,and visualize the network topology.
 
-I pointed Nmap at `192.168.43.0/24` and ran it with the **Ping scan** profile, which under the hood executes `nmap -sn 192.168.43.0/24`.
+The local network used for the exercise was:
 
-Out of the 256 addresses in that range, two hosts answered:
+Network: 192.168.56.0/24
 
-- `192.168.43.244` - host is up; MAC `66:0B:CB:7B:10:A8` 
-- `192.168.43.197` - host is up (my scanning device)
+I configured Zenmap with the following target and scan profile:
 
-The scan wrapped up in 12.58 seconds (256 addresses scanned, 2 hosts up). This is a host discovery scan, so no ports were probed - it only confirms which IPs are active on the hotspot, which is the first step before deeper port scanning.
+Target: 192.168.56.0/24
+Profile: Ping Scan
+Command: nmap -sn 192.168.56.0/24
+
+The scan examined 256 IP addresses and identified three active hosts:
+
+*192.168.56.1
+*192.168.56.100
+*192.168.56.101
+
+The scan completed in approximately 3.21 seconds.
+
+The scan results also identified 192.168.56.100 as an Oracle VirtualBox virtual network interface,while the other addresses corresponded to systems/interfaces participating in the controlled Host-Only network.
+
+I then used the Topology feature in Zenmap to visualize the discovered hosts.The resulting topology displayed the three active IP addresses and their relationship within the local network.
+
+## 
+
 ## 4. Risk Analysis / Impact
 
 Pulling together what each tool surfaced, here's how I'd rate the exposure:
