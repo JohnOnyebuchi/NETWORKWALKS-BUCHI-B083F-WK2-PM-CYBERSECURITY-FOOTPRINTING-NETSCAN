@@ -185,13 +185,18 @@ The scan results also identified 192.168.56.100 as an Oracle VirtualBox virtual 
 
 I then used the Topology feature in Zenmap to visualize the discovered hosts.The resulting topology displayed the three active IP addresses and their relationship within the local network.
 
+## Evidences Collected
 ![](8-Screenshot-nmap.png)
+
+## Figure 1: Zenmap output showing three active hosts on 192.168.56.0/24.
 
 ![](9-Screenshot-topology.png)
 
+## Figure 2: Zenmap Topology showing the discovered hosts.
+
 ## 4. Risk Analysis / Impact
 
-Pulling together what each tool surfaced, here's how I'd rate the exposure:
+Based on the observations made during the footprinting and network-scanning activities, the following potential security considerations were identified:
 
 | # | Finding | Evidence / Observation | Risk |
 |---|---------|------------------------|------|
@@ -201,16 +206,18 @@ Pulling together what each tool surfaced, here's how I'd rate the exposure:
 | 4 | WAF product identifiable | wafw00f confirmed ModSecurity (SpiderLabs) is in front of the site after 2 requests. | Low |
 | 5 | DNS/mail footprint exposed | DNSRecon pulled SOA, NS, A, MX, SPF, TXT and SRV Autodiscover records spanning six cPanel IP addresses. | Low |
 | 6 | Nameserver software version disclosed | Both authoritative servers ( `192.232.216.131` and `50.87.144.87` ) reported BIND version `9.16.23-RH`. | Medium |
-| 7 | Live hosts found on local hotspot | Nmap found 2 live hosts on `192.168.43.0/24`; `192.168.43.244` with MAC `66:0B:CB:7B:10:A8` and `192.168.43.197` (scanning device). No ports were scanned, only host discovery. | Low |
+| 7 | Multiple active host discovered on local network | Nmap identified 3 live hosts on `192.168.43.0/24`, .100,and .101. | Low |
 
 **Risk level key: ● Critical ● Medium ● Low**
 
-None of the items above were exploited or confirmed as actual vulnerabilities, this was purely an information-gathering and host-discovery exercise. A version number, an open port, or a DNS record on its own doesn't prove a system is exploitable; it just narrows down where a deeper, authorised test would need to look.
+The findings above are observations from reconnaissance and scanning activities, not confirmed vulnerabilities.
+The purpose of the exercises was primarily information gathering, host discovery, and service enumeration. No exploitation or vulnerability validation was performed as part of these activities.
+
 ## 5. Recommendations
 
-1. **Strip version detail out of what the stack advertises** WhatWeb only found the WordPress 7.1 and WP Download Manager 3.3.58 version numbers because WordPress prints them straight into the page's meta generator tag and into script/style query strings by default. Removing the generator tag (a one-line filter in `functions.php`: `remove_action('wp_head','wp_generator')`) and stripping version query strings from enqueued assets would mean a casual WhatWeb-style scan no longer hands over exact version numbers for free.
+1. **Review Publicly Available Infomation** Organizations should periodically review the information publicly available about their domains,infrastructure,employees, and technologies.
 
-2. **Patch WordPress core and the Download Manager plugin on a schedule, not reactively** WordPress Download Manager has had multiple file download and access control CVEs in the past. Keeping core and plugins updated on a weekly check would close that gap.
+2. **Monitor External Attack Surface** Organizations should maintain awareness of externally visible domains,subdomains,hosts,and services.
 
 3. **Trim what the response headers give away** The `Link` header currently exposes the full REST API discovery URL and a direct link to page 53 to anyone running `curl -I`. Since the site doesn't appear to need public REST discovery for logged-out visitors, adding `remove_action('wp_head','rest_output_link_wp_head')` would drop that line from the headers. It would also be worth moving the `referrer-policy` from `no-referrer-when-downgrade` to the stricter `strict-origin-when-cross-origin`, since the current setting still leaks the full referring URL over HTTPS-to-HTTPS navigation.
 
@@ -220,7 +227,7 @@ None of the items above were exploited or confirmed as actual vulnerabilities, t
 
 6. **Keep ModSecurity enabled and tuned** wafw00f correctly flagged ModSecurity. No change needed, just keep the rule-set updated and in blocking mode.
 
-7. **Secure the local hotspot and document host changes** My Nmap ping scan on `192.168.43.0/24` found 2 live hosts (`192.168.43.244` with MAC `66:0B:CB:7B:10:A8` and `192.168.43.197`). This was only a host discovery scan (`-sn`), so the next step in a lab would be a controlled port scan to confirm no unexpected services are exposed. On a personal hotspot, keep the hotspot password strong and disconnect unknown devices.
+7. **Secure the local hotspot and document host changes** My Nmap ping scan on `192.168.43.0/24` found 3 live hosts.This was only a host discovery scan (`-sn`), so the next step in a lab would be a controlled port scan to confirm no unexpected services are exposed. On a personal hotspot, keep the hotspot password strong and disconnect unknown devices.
 
 8. **Keep a running log instead of a one-off scan result** Saving the Nmap output (hosts, MAC addresses, scan time) each time a scan is run - the way Section 8 of this report already does for this one, turns individual scans into a timeline. That makes it far quicker to spot when something has changed, rather than relying on memory of what a network looked like last time.
 
@@ -228,43 +235,34 @@ None of the items above were exploited or confirmed as actual vulnerabilities, t
 
 ## 6. Conclusion
 
-My week 2 gave me a hands-on run-through of the two things that typically kick off a security assessment: gathering what's publicly available about a target, and then actively scanning to see what's reachable on a network.
+During Week 2 of my cybersecurity training,I completed practical activities covering footprinting,reconnaissance,network discovery,and network scanning.
 
-The footprinting half showed how much can be pieced together without touching the target directly, WHOIS for ownership and hosting history, WhatWeb for the technology stack, Nslookup for the resolving IP, curl for what the server volunteers in its headers, wafw00f for the firewall sitting in front, and DNSRecon for the full DNS and mail picture. None of it required exploitation, just careful reading of what each tool returned.
+During the reconnaissance phase,I learned how tools such as theHarvester can be used to collect publicly available information and contribute to an initial understanding of a target's external footprint.
 
-The Nmap half shifted from reading to probing: sweeping my own hotspot subnet `192.168.43.0/24` turned up two live devices and their MAC addresses in 12.58 seconds. Even a simple ping scan shows the first step of active discovery.
+During the network-scanning phase,I worked with Kali Linux, Windows, VirtualBox, and Nmap in a controlled Host-Only network environment.
+I identified the Windows host as:
 
-If there's one takeaway from the week, it's that documentation matters as much as the technical work itself, a finding is only useful if it's written down clearly enough that someone else (or future me) can see what was run, what came back, and what it actually means in terms of risk. Everything here stayed within the scope I was authorized for: a domain that is public and my own local network.
+192.168.56.1
 
-## 7. Evidences Collected
+and identified the local network as:
 
-Kali Linux Terminal and Nmap screenshots captured during testing
+192.168.56.0/24
 
-### whois networkwalks.com
-![whois](whois.png.png)
+I also identified Kali's Host-Only interface as:
 
-### whatweb networkwalks.com
-![whatweb](Whatweb.png.png)
+192.168.56.101/24
 
-### nslookup networkwalks.com
-![nslookup](nslookup.png.png)
+After confirming connectivity between the systems,I performed Nmap host discovery and service/version scanning against the authorized local network and Windows host.
 
-### curl -I networkwalks.com
-![curl](curl.png.png)
+The exercises helped me understand that cybersecurity is not only about exploiting vulnerabilities.Before deeper testing can take place,security professionals need to understand the environment,identify systems,collect information,and document their observations carefully.
 
-### wafw00f networkwalks.com
-![wafw00f](wafw00f.png.png)
+I also learned the importance of distinguishing between an observation and a confirmed vulnerability.A discovered host, open service,IP address,or publicly available piece of information requires further authorized investigation before a security conclusion can be made.
 
-### dnsrecon -d networkwalks.com
-![dnsrecon](dnsrecon.png.png)
+Finally,the practical reinforced the importance of performing reconnaissance and scanning only within an authorized scope.
 
-### nmap -sn 192.168.43.0/24
-![nmap](nmap.png.png)
-### Nmap Network Topology
-![nmap-topology](Nemap%20Network%20Topology.png)
 ## Author
 
-**Ugwuoke, Annastecia** Cybersecurity Professional (Intern)
+**SUNDAY JOHN ONYEBUCHI** Cybersecurity Professional (Intern)
 
 ## Project Information
 
@@ -272,6 +270,6 @@ Kali Linux Terminal and Nmap screenshots captured during testing
 
 **Target:** networkwalks.com (passive) and 192.168.43.0/24 (my own hotspot - active scan)
 
-**Tools Used:** whois, whatweb, nslookup, curl, wafw00f, dnsrecon, nmap
+**Tools Used:** whois, whatweb, nslookup, curl, wafw00f, dnsrecon, nmap, theHarvester
 
-**GitHub:** github.com
+
