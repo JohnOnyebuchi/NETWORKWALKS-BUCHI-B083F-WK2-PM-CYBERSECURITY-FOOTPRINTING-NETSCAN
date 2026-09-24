@@ -187,7 +187,7 @@ I then used the Topology feature in Zenmap to visualize the discovered hosts.The
 
 ![](8-Screenshot-nmap.png)
 
-![](9-Screenshot-nmaptopology.png)
+![](9-Screenshot-topology.png)
 
 ## 4. Risk Analysis / Impact
 
