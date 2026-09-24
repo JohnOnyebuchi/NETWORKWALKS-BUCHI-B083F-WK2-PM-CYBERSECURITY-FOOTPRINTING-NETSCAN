@@ -161,18 +161,22 @@ For the second activity,I used Zenmap to perform network discovery on my control
 
 The local network used for the exercise was:
 
-Network: 192.168.56.0/24
+Network:192.168.56.0/24
 
 I configured Zenmap with the following target and scan profile:
 
-Target: 192.168.56.0/24
-Profile: Ping Scan
-Command: nmap -sn 192.168.56.0/24
+Target:192.168.56.0/24
+
+Profile:Ping Scan
+
+Command:nmap -sn 192.168.56.0/24
 
 The scan examined 256 IP addresses and identified three active hosts:
 
 *192.168.56.1
+
 *192.168.56.100
+
 *192.168.56.101
 
 The scan completed in approximately 3.21 seconds.
@@ -181,7 +185,9 @@ The scan results also identified 192.168.56.100 as an Oracle VirtualBox virtual 
 
 I then used the Topology feature in Zenmap to visualize the discovered hosts.The resulting topology displayed the three active IP addresses and their relationship within the local network.
 
-## 
+![](8-Screenshot-nmap.png)
+
+![](9-Screenshot-nmaptopology.png)
 
 ## 4. Risk Analysis / Impact
 
